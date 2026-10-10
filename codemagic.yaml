@@ -6,8 +6,10 @@ workflows:
     environment:
       flutter: stable
     scripts:
-      - name: Generate Android project files
+      - name: Prepare project
         script: |
+          mkdir -p lib
+          if [ -f main.dart ]; then cp main.dart lib/main.dart; fi
           flutter create --platforms=android --org com.bossoftheday --project-name boss_of_the_day /tmp/proj
           cp -r /tmp/proj/android ./android
       - name: Get packages
